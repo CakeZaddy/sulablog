@@ -1,0 +1,12 @@
+.title {
+  background-color: #5e4fff31;
+  text-align: center;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 10px;
+}
+
+.content {
+  display: flex;
+  gap: 50px;
+}
