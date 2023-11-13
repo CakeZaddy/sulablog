@@ -18,7 +18,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
-import { app } from '@/app/utils/firebase'
+import { app } from '@/utils/firebase'
 
 const storage = getStorage(app)
 
