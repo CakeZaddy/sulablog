@@ -1,4 +1,5 @@
-import prisma from '@/app/utils/connect'
+import { getAuthSession } from '@/utils/auth'
+import prisma from '@/utils/connect'
 import { NextResponse } from 'next/server'
 
 export const GET = async (req) => {
@@ -31,14 +32,27 @@ export const GET = async (req) => {
   }
 }
 
-// export const GET = async () => {
-//   try {
-//     const posts = await prisma.post.findMany()
+// CREATE SINGLE POST
+export const POST = async (req) => {
+  const session = await getAuthSession()
 
-//     return new NextResponse(JSON.stringify(posts, { status: 200 }))
-//   } catch (error) {
-//     return new NextResponse(
-//       JSON.stringify({ message: 'Posts not found' }, { status: 500 })
-//     )
-//   }
-// }
+  if (!session) {
+    return new NextResponse(
+      JSON.stringify({ message: 'Not Authenticated' }, { status: 401 })
+    )
+  }
+
+  try {
+    const body = await req.json()
+    const post = await prisma.post.create({
+      data: { ...body, userEmail: session.user.email },
+    })
+
+    return new NextResponse(JSON.stringify(comment, { status: 200 }))
+  } catch (error) {
+    // console.log(error)
+    return new NextResponse(
+      JSON.stringify({ message: 'Something is wrong' }, { status: 500 })
+    )
+  }
+}

@@ -1,5 +1,5 @@
-import { getAuthSession } from '@/app/utils/auth'
-import prisma from '@/app/utils/connect'
+import { getAuthSession } from '@/utils/auth'
+import prisma from '@/utils/connect'
 import { NextResponse } from 'next/server'
 
 // GET SINGLE POST COMMENTS
@@ -24,7 +24,7 @@ export const GET = async (req) => {
   }
 }
 
-// POST SINGLE POST COMMENTS
+// CREATE SINGLE POST COMMENTS
 export const POST = async (req) => {
   const session = await getAuthSession()
 
