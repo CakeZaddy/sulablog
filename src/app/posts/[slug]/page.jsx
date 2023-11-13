@@ -4,8 +4,13 @@ import Menu from '@/components/menu/Menu'
 import Image from 'next/image'
 import Comments from '@/components/comments/Comments'
 
+const API_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http:localhost:3000' // Development API URL
+    : 'https://sulablog-p92r833su-cakezaddy.vercel.app' // Production API URL
+
 const getData = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+  const res = await fetch(`${API_URL}/api/posts/${slug}`, {
     cache: 'no-store',
   })
 

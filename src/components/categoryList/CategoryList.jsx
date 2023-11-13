@@ -3,8 +3,13 @@ import styles from './categoryList.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
 
+const API_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http:localhost:3000' // Development API URL
+    : 'https://sulablog-p92r833su-cakezaddy.vercel.app' // Production API URL
+
 const getData = async () => {
-  const res = await fetch('http://localhost:3000/api/categories', {
+  const res = await fetch(`${API_URL}/api/categories`, {
     cache: 'no-store',
   })
 

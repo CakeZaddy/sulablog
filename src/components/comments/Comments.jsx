@@ -20,11 +20,16 @@ const fetcher = async (url) => {
   return data
 }
 
+const API_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'http:localhost:3000' // Development API URL
+    : 'https://sulablog-p92r833su-cakezaddy.vercel.app' // Production API URL
+
 const Comments = ({ postSlug }) => {
   const { status } = useSession()
 
   const { data, mutate, isLoading } = useSWR(
-    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
+    `/api/comments?postSlug=${postSlug}`,
     fetcher
   )
 
